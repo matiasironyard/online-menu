@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Order from '../components/Order'
+import HandleOrder from '../components/Order2'
 
 export default class Entrees extends Component {
 
@@ -27,7 +27,7 @@ export default class Entrees extends Component {
               {items.price}
             </td>
             <td>
-              <Order orderFunc={orderFunc} deleteFunc={deleteFunc}  item={items} tag={true}/>
+                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>
             </td>
           </tr>
         </tbody>

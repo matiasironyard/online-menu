@@ -4,9 +4,11 @@
   "private": true,
   "homepage": "https://matiasironyard.github.io/online-menu/",
   "dependencies": {
+    "bootstrap-toggle": "^2.2.2",
     "immutability-helper": "^2.3.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.1",
+    "react-bootstrap-toggle": "^2.0.8",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10"

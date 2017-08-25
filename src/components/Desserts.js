@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Order from '../components/Order'
+import HandleOrder from '../components/Order2'
 
 export default class Desserts extends Component {
   // Add the appropiate lifecycle method so that the component receives the props before mounting.
@@ -28,7 +28,7 @@ export default class Desserts extends Component {
               {items.price}
             </td>
             <td>
-              <Order orderFunc={orderFunc} deleteFunc={deleteFunc}  item={items} tag={true}/>
+                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>
             </td>
           </tr>
         </tbody>

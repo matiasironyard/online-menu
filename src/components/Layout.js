@@ -30,7 +30,7 @@ export default class BaseLayout extends Component {
       "fontSize": "180%"
     }
     return (
-      <div className="container-fluid nav">
+      <div className="nav">
         <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -84,11 +84,13 @@ export default class BaseLayout extends Component {
 
 
         {this.props.children}
-        <footer className="col-sm-12">
-          <span className="footer-title">Majestic Thai </span>
-          <span>
-            100 Main Street, Spartanburg, SC, 29302 | (864) 898-9999
-          </span>
+        <footer className="row">
+          <div className="col-sm-12">
+            <span className="footer-title">Majestic Thai </span>
+            <span>
+              100 Main Street, Spartanburg, SC, 29302 | (864) 898-9999
+            </span>
+          </div>
         </footer>
       </div>
     );

@@ -4,7 +4,7 @@ import './styles/index.css';
 import './styles/App.css';
 import registerServiceWorker from './registerServiceWorker';
 //import React Router
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 //import Components
 import Menu from './components/Menu';
 import About from './components/About';
@@ -13,15 +13,15 @@ import BaseLayout from './components/Layout';
 
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <BaseLayout>
       <Switch>
+                <Route exact  path="/" component={About}/>
         <Route path="/findus" component={Find} />
         <Route path="/menu" component={Menu} />
-        <Route path="/" component={About}/>
       </Switch>
     </BaseLayout>
-  </BrowserRouter>
+  </HashRouter>
 
 ,document.getElementById('root'));
 registerServiceWorker();

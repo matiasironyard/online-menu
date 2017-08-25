@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
-import Order from '../components/Order'
+import HandleOrder from '../components/Order2'
 
 export default class Appetizers extends Component {
-  // Add the appropiate lifecycle method so that the component receives the props before mounting.
+
 
   render(){
+    console.log('hdad', this.state)
     // PROPS
     let items = this.props.appetizers
     let orderFunc = this.props.orderFunc;
     let deleteFunc = this.props.deleteFunc;
+    let order = this.props.order
     // Since the items do not have a key, let's create one.
     let key = Math.random();
+
     // MAP PROPS
     let appetizers = items.map((items)=>{
       // Increment the key so that each items has one.
+
+
       key++;
       return (
         <tbody key={key}>
@@ -28,7 +33,9 @@ export default class Appetizers extends Component {
               {items.price}
             </td>
             <td>
-                <Order orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} tag={true}/>
+              <div className="btn-group" role="group" aria-label="...">
+                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>
+              </div>
             </td>
           </tr>
         </tbody>

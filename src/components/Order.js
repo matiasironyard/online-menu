@@ -26,7 +26,7 @@ export default class Order extends Component {
               <i className="fa fa-check" aria-hidden="true"></i>
             </button>
           )}
-        {this.state.tag === false
+        {this.state.tag === true
           ? (
             <button type="button" className="btn btn-default" onClick={(e) => deleteFunc(this.props.item) + this.setState({tag: true})}>
               <i className="fa fa-trash-o" aria-hidden="true"></i>

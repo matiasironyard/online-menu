@@ -65,9 +65,11 @@ export default class BaseLayout extends Component {
               </div>
             </div>
           </nav>
+
             <div
-              className="row header"
+              className="row no-gutter header"
               style={headerStyle}>
+
               <div className="header-title col-sm-12">
                 <div
                   className="restaurant-name"
@@ -78,18 +80,20 @@ export default class BaseLayout extends Component {
                   East Meets West
                 </div>
               </div>
+                          
             </div>
+
 
             {/*
               PASS IN CHILDREN
               */}
-              <div className="row">
+              <div className="row no-gutter">
                 {this.props.children}
               </div>
 
 
 
-        <footer className="row">
+        <footer className="row no-gutter">
           <div className="col-sm-12">
             <span className="footer-title">Majestic Thai </span>
             <span>

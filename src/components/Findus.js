@@ -17,7 +17,7 @@ export default class Find extends Component {
 
     return (
       <div className="findus offset col-sm-10 col-sm-offset-1">
-        <section className="row" style={style}>
+        <section className="row no-gutter" style={style}>
           <div className="col-sm-5 map">
             <h3 className="sub-headings" style={subHeadings}>Directions</h3>
             <img className="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?center=greenville,sc&zoom=16&scale=3&size=600x500&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7Cgreenville,+sc" alt="Google Map of greenville,sc"/>

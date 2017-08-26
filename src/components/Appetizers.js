@@ -42,7 +42,7 @@ export default class Appetizers extends Component {
       )
     })
     return (
-      <div className="row">
+      <div className="row no-gutter">
         <div className="col-sm-8 col-sm-offset-2">
           <h3 className="sub-headings">Appetizers</h3>
           <hr/>

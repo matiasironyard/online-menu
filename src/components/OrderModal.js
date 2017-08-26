@@ -174,7 +174,7 @@ export default class OrderModal extends Component {
               </div>
               <button type="button" className="btn btn-primary pull-right" type="button" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
             </div>
-            <div className="row">
+            <div className="row no-gutter">
               <div className="col-sm-12">
                 <div className="collapse" id="collapsePayment">
                   <div className="col-sm-12">
@@ -218,7 +218,7 @@ export default class OrderModal extends Component {
                               </span>
                             </div>
                           </div>
-                          <div className="row">
+                          <div className="row no-gutter">
                             <div className="col-sm-4">
                               <div className="form-group">
                                 <label for="expityMonth">
@@ -252,7 +252,7 @@ export default class OrderModal extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row no-gutter">
               <div className="col-sm-12">
                 <div className="collapse" id="collapseStatus">
                   <div className="well">

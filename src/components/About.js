@@ -24,7 +24,7 @@ export default class About extends Component {
     }
     return (
       <div className="app-body about offset col-sm-10 col-sm-offset-1">
-        <section className="row" style={aboutStyle}>
+        <section className="row no-gutter" style={aboutStyle}>
           <article className="col-sm-10 col-sm-offset-1">
             <h2 className="headings">
               Our History
@@ -35,7 +35,7 @@ export default class About extends Component {
             </p>
           </article>
         </section>
-        <section className="row" style= {cuisineStyle}>
+        <section className="row no-gutter" style= {cuisineStyle}>
           <article className="col-sm-8">
             <h2 className="headings">
               Our Cuisine

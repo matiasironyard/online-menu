@@ -12,7 +12,7 @@ export default class About extends Component {
       "backgroundSize": "cover",
       "textShadow": "1px 1px 2px black",
       "height": "100%",
-      "padding": "100px"
+    //  "paddingTop": "20px"
     }
     let aboutStyle = {
       "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./images/dish.jpg)",
@@ -20,7 +20,7 @@ export default class About extends Component {
       "textShadow": "1px 1px 2px black",
       "backgroundPosition": "top",
       "height": "100%",
-      "padding": "100px"
+      //"padding": "100px"
     }
     return (
       <div className="app-body about offset col-sm-10 col-sm-offset-1">

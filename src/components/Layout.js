@@ -7,15 +7,15 @@ export default class BaseLayout extends Component {
     // INLINE STYLING
     let titleStyle = {
       "fontFamily": "Arizonia",
-      "fontSize": "12rem",
+      "fontSize": "8rem",
     }
     let subtitleStyle = {
       "fontFamily": "Raleway",
-      "fontSize": "7rem"
+      "fontSize": "5rem"
     }
     let headerStyle = {
       "textAlign": "center",
-      "height": "600px",
+      "height": "60vh",
       "paddingTop": "100px",
       "color": "#fff",
       "backgroundImage": "url(./images/header2.jpeg)",
@@ -31,6 +31,7 @@ export default class BaseLayout extends Component {
     }
     return (
       <div>
+        <div className="row no-gutter">
 
         <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container-fluid">
@@ -65,6 +66,7 @@ export default class BaseLayout extends Component {
               </div>
             </div>
           </nav>
+          </div>
 
             <div
               className="row no-gutter header"
@@ -80,7 +82,7 @@ export default class BaseLayout extends Component {
                   East Meets West
                 </div>
               </div>
-                          
+
             </div>
 
 

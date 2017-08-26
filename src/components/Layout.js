@@ -30,7 +30,8 @@ export default class BaseLayout extends Component {
       "fontSize": "180%"
     }
     return (
-      <div className="nav">
+      <div>
+
         <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -78,12 +79,16 @@ export default class BaseLayout extends Component {
                 </div>
               </div>
             </div>
+
             {/*
               PASS IN CHILDREN
               */}
+              <div className="row">
+                {this.props.children}
+              </div>
 
 
-        {this.props.children}
+
         <footer className="row">
           <div className="col-sm-12">
             <span className="footer-title">Majestic Thai </span>
@@ -92,7 +97,9 @@ export default class BaseLayout extends Component {
             </span>
           </div>
         </footer>
-      </div>
+
+        </div>
+
     );
   }
 }

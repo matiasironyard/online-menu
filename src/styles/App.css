@@ -12,6 +12,7 @@ nav{
 
 .app-body{
   background-color: white;
+  padding: 30px;
 }
 
 .offset{
@@ -19,6 +20,7 @@ nav{
   bottom: 80px;
   box-shadow:  rgba(0, 0, 0, 0.22) -2px 9px 5px 0px;
 }
+
 .headings {
   font-family: Arizonia;
   font-size: 80px;

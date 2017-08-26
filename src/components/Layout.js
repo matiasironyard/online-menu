@@ -15,7 +15,7 @@ export default class BaseLayout extends Component {
     }
     let headerStyle = {
       "textAlign": "center",
-      "height": "60vh",
+      "height": "70vh",
       "paddingTop": "100px",
       "color": "#fff",
       "backgroundImage": "url(./images/header2.jpeg)",

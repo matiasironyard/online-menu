@@ -128,6 +128,8 @@ export default class OrderModal extends Component {
     })
 
     return (
+      <div className="row">
+        <div className="col-sm-12">
       <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -280,6 +282,8 @@ export default class OrderModal extends Component {
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     )
   }

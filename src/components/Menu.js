@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import update from 'immutability-helper';
 
 // IMPORT COMPONENTS
 import Appetizers from '../components/Appetizers';
@@ -38,14 +39,17 @@ class Menu extends Component {
       let i;
       for (i in appetizers) {
         appetizers[i].checkbox = false;
+        appetizers[i].cat = 'appetizers';
       }
       let entrees = menu.Entrees;
       for (i in entrees) {
         entrees[i].checkbox = false;
+        entrees[i].cat = 'entrees';
       }
       let desserts = menu.Desserts;
       for (i in desserts) {
         desserts[i].checkbox = false;
+        desserts[i].cat = 'desserts';
       }
       this.setState({appetizers: appetizers, entrees: entrees, desserts: desserts})
     });
@@ -53,7 +57,8 @@ class Menu extends Component {
 
   handleOrder = (e) => {
     let dish = e.dish;
-    let price = e.price
+    let price = e.price;
+    let cat = e.cat;
     let orderItem = {
       dish: dish,
       price: price,
@@ -61,19 +66,58 @@ class Menu extends Component {
       checkbox: true
     };
     let joined = this.state.order.concat(orderItem);
-    this.setState({order: joined, toggleActive: true, orderItem: orderItem})
+
+    let state;
+    if (cat === "appetizers") {
+      state = this.state.appetizers
+    } else if (cat === "entrees") {
+      state = this.state.entrees
+    } else if (cat === "desserts") {
+      state = this.state.desserts
+    }
+
+    function isItem(element) {
+      return element.dish === dish;
+    }
+    let index = state.findIndex(isItem);
+
+    let newObj = update(state, {
+      checkbox: {
+        $set: state[index].checkbox = true
+      }
+    });
+    this.setState({order: joined, toggleActive: true, orderItem: orderItem, state: newObj})
+
   }
 
   handleDelete = (e) => {
     let dish = e.dish;
+    let cat = e.cat;
+    let state;
+    if (cat === "appetizers") {
+      state = this.state.appetizers
+    } else if (cat === "entrees") {
+      state = this.state.entrees
+    } else if (cat === "desserts") {
+      state = this.state.desserts
+    }
     function isItem(element) {
       return element.dish === dish;
     }
-    let index = this.state.order.find(isItem);
+    let item = this.state.order.find(isItem);
     let updatedOrder = this.state.order.filter(function(i) {
-      return i !== index
+      return i !== item
     });
-    this.setState({order: updatedOrder})
+    function findIndex(element) {
+      return element.dish === dish;
+    }
+    let index = state.findIndex(findIndex);
+    let newObj = update(state, {
+      checkbox: {
+        $set: state[index].checkbox = false
+      }
+    });
+    this.setState({order: updatedOrder, state: newObj})
   }
 
   handleIncrement = (e) => {
@@ -94,7 +138,9 @@ class Menu extends Component {
       <div className="app-body offset col-sm-10 col-sm-offset-1">
         <h2 className="col-sm-offset-2 headings">Menu</h2>
         {this.state.order.length > 0
-          ? (<ModalButton className="hidden" order={this.state.order}/>)
+          ? (
+            <ModalButton order={this.state.order}/>
+          )
           : (
             <span className="hidden"></span>
           )}

@@ -29,6 +29,7 @@ export default class BaseLayout extends Component {
       "fontFamily": "Arizonia",
       "fontSize": "180%"
     }
+    console.log('layout', this)
     return (
       <div>
         <div className="row no-gutter">

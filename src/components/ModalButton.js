@@ -8,7 +8,7 @@ export default class ModalButton extends Component {
     return(
       <div>
         {this.props.order.length > 0 ? (
-              <button type="button" className="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+              <button type="button" className="btn btn-default pull-right order-btn" data-toggle="modal" data-target="#myModal" style={{zIndex: "2"}}>
                 View Order ({this.props.order.length})
               </button>
             ):(<span></span>)}

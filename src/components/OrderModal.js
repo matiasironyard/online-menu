@@ -63,10 +63,8 @@ export default class OrderModal extends Component {
       let key = Math.random();
 
       return (
-        <tr key={key} style={{
-          "zIndex": "1"
-        }}>
-          <td>{items.dish}</td>
+        <tr key={key}>
+          <td>{items.dish} ($ {items.price})</td>
           <td>
             {items.quantity}
           </td>
@@ -92,35 +90,13 @@ export default class OrderModal extends Component {
             </div>
           </td>
           <td>
-            <div className="btn-group" style={{
-              "zIndex": "99"
-            }}>
-              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i className="fa fa-leaf" aria-hidden="true"></i>
-                Level
-                <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu" style={{
-                "position": "relative",
-                "zIndex": "99"
-              }}>
-                <li>
-                  <a>1</a>
-                </li>
-                <li>
-                  <a>2</a>
-                </li>
-                <li>
-                  <a>3</a>
-                </li>
-                <li>
-                  <a>4</a>
-                </li>
-                <li>
-                  <a>5</a>
-                </li>
-              </ul>
-            </div>
+            <select className="form-control">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
           </td>
           <td>{toDecimals}</td>
         </tr>
@@ -174,7 +150,7 @@ export default class OrderModal extends Component {
                   </tbody>
                 </table>
               </div>
-              <button type="button" className="btn btn-primary pull-right" type="button" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
+              <button type="button" className="btn btn-primary pull-right" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
             </div>
             <div className="row no-gutter">
               <div className="col-sm-12">
@@ -187,34 +163,34 @@ export default class OrderModal extends Component {
                         </h3>
                       </div>
                       <div className="panel-body">
-                        <form role="form">
+                        <form>
                           <div className="form-group">
-                            <label for="firstName">
+                            <label htmlFor="firstName">
                               FIRST NAME</label>
                             <div className="input-group">
-                              <input type="text" className="form-control" id="firstName" placeholder="First Name" required autofocus/>
+                              <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
                             </div>
-                            <label for="lastName">
+                            <label htmlFor="lastName">
                               LAST NAME</label>
                             <div className="input-group">
-                              <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autofocus/>
+                              <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
                             </div>
-                            <label for="phone">
+                            <label htmlFor="phone">
                               PHONE NUMBER</label>
                             <div className="input-group">
-                              <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autofocus/>
+                              <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
                             </div>
-                            <label for="email">
+                            <label htmlFor="email">
                               EMAIL ADDRESS</label>
                             <div className="input-group">
-                              <input type="text" className="form-control" id="email" placeholder="Email Address" required autofocus/>
+                              <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
                             </div>
                           </div>
                           <div className="form-group">
-                            <label for="cardNumber">
+                            <label htmlFor="cardNumber">
                               CARD NUMBER</label>
                             <div className="input-group">
-                              <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus/>
+                              <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
                               <span className="input-group-addon">
                                 <span className="glyphicon glyphicon-lock"></span>
                               </span>
@@ -223,7 +199,7 @@ export default class OrderModal extends Component {
                           <div className="row no-gutter">
                             <div className="col-sm-4">
                               <div className="form-group">
-                                <label for="expityMonth">
+                                <label htmlFor="expityMonth">
                                   EXPIRY DATE</label>
                                 <div className="col-sm-6">
                                   <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
@@ -234,7 +210,7 @@ export default class OrderModal extends Component {
                             </div>
                             <div className="col-xs-5 col-md-5 pull-right">
                               <div className="form-group">
-                                <label for="cvCode">
+                                <label htmlFor="cvCode">
                                   CV CODE</label>
                                 <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
                               </div>
@@ -243,7 +219,7 @@ export default class OrderModal extends Component {
                         </form>
                       </div>
                     </div>
-                    <button type="button" className="btn btn-primary pull-right" type="button" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={()=>this.setState({checkout: true})}>
+                    <button type="button" className="btn btn-primary pull-right" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={()=>this.setState({checkout: true})}>
                       {this.state.checkout === false ? (
                         "Make Payment"
                       ):(

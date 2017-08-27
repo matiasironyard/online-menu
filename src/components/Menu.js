@@ -16,7 +16,7 @@ class Menu extends Component {
       desserts: [],
       order: [],
       toggleActive: false,
-      orderItem: 'crab'
+      orderItem: {dish: "crab"}
     }
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
@@ -51,14 +51,16 @@ class Menu extends Component {
     });
   }
 
-  handleOrder = (e) => {
+  handleOrder = (e, refs,id) => {
     let dish = e.dish;
     let price = e.price
+    console.log('refs', refs)
     let orderItem = {
       dish: dish,
       price: price,
       quantity: 1,
-      checkbox: true
+      refs: refs,
+      id: id
     };
     let joined = this.state.order.concat(orderItem);
     this.setState({order: joined, toggleActive: true, orderItem: orderItem})
@@ -99,7 +101,7 @@ class Menu extends Component {
             <span className="hidden"></span>
           )}
         <OrderModal order={this.state.order} increment={this.handleIncrement} decrement={this.handleDecrement} subTotal={this.state.subTotal} deleteFunc={this.handleDelete}/>
-        <Appetizers appetizers={this.state.appetizers} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
+        <Appetizers appetizers={this.state.appetizers} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem} order={this.state.order}/>
         <Entrees entrees={this.state.entrees} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
         <Desserts desserts={this.state.desserts} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
       </div>

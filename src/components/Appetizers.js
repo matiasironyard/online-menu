@@ -34,7 +34,7 @@ export default class Appetizers extends Component {
             </td>
             <td>
               <div className="btn-group" role="group" aria-label="...">
-                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>
+                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem} menuItem={items.dish} order={this.props.order}/>
               </div>
             </td>
           </tr>

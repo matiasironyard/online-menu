@@ -63,7 +63,7 @@ class Menu extends Component {
       dish: dish,
       price: price,
       quantity: 1,
-      checkbox: true
+      cat: cat
     };
     let joined = this.state.order.concat(orderItem);
 
@@ -108,6 +108,7 @@ class Menu extends Component {
     let updatedOrder = this.state.order.filter(function(i) {
       return i !== item
     });
+
     function findIndex(element) {
       return element.dish === dish;
     }

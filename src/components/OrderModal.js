@@ -6,11 +6,13 @@ export default class OrderModal extends Component {
     this.state = {
       order: [],
       quantity: 1,
-      subTotal: this.props.subTotal,
       checkout: false,
+      makePayment: "Make Payment",
+      timer: null
     }
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
+    this.processPayment = this.processPayment.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,6 +27,30 @@ export default class OrderModal extends Component {
 
   handleDecrement = (e) => {
     this.props.decrement(e);
+  }
+
+  processPayment = () => {
+    setTimeout(() => {
+      let start = Date.now();
+      let self = this;
+      (function f() {
+        let diff = Date.now() - start,
+          ns = (((6e5 - diff) / 1000) >> 0),
+          m = (ns / 60) >> 0,
+          s = ns - m * 60;
+        if (diff > (6e5)) {
+          start = Date.now()
+        }
+        console.log('now', start, m, s)
+        self.setState({
+          timer: m + ':' + (('' + s).length > 1
+            ? ''
+            : '0') + s + ' minutes'
+        })
+        setTimeout(f, 1000);
+      })();
+      this.setState({checkout: false, makePayment: "Done!"})
+    }, 2000);
   }
 
   /*  handleSubTotal=(e)=>{
@@ -53,7 +79,11 @@ export default class OrderModal extends Component {
     total = Number(total)
     let grandTotal = (total + tax).toFixed(2);
 
-    let deleteFunc = this.props.deleteFunc
+    let deleteFunc = this.props.deleteFunc;
+
+    let processPayment = this.state.processPayment;
+
+    console.log('this state now', this.state)
 
     let items = order.map((items) => {
       let price = Number(items.price)
@@ -64,7 +94,7 @@ export default class OrderModal extends Component {
 
       return (
         <tr key={key}>
-          <td>{items.dish} ($ {items.price})</td>
+          <td>{items.dish}</td>
           <td>
             {items.quantity}
           </td>
@@ -89,15 +119,6 @@ export default class OrderModal extends Component {
               </button>
             </div>
           </td>
-          <td>
-            <select className="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </td>
           <td>{toDecimals}</td>
         </tr>
       )
@@ -106,160 +127,199 @@ export default class OrderModal extends Component {
     return (
       <div className="row">
         <div className="col-sm-12">
-      <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 className="modal-title" id="myModalLabel">Order Checkout</h4>
-            </div>
-            <div className="modal-body">
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Dish</th>
-                      <th>Quantity</th>
-                      <th>Adjust</th>
-                      <th>Spice</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items}
-                  </tbody>
-                </table>
-              </div>
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Subtotal</th>
-                      <th>Tax</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{subTotal}</td>
-                      <td>{tax}</td>
-                      <td>{grandTotal}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <button type="button" className="btn btn-primary pull-right" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
-            </div>
-            <div className="row no-gutter">
-              <div className="col-sm-12">
-                <div className="collapse" id="collapsePayment">
+          <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 className="modal-title" id="myModalLabel">Order Checkout</h4>
+                </div>
+                <div className="modal-body">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Dish</th>
+                          <th>Quantity</th>
+                          <th>Adjust</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {items}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Subtotal</th>
+                          <th>Tax</th>
+                          <th>Total</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{subTotal}</td>
+                          <td>{tax}</td>
+                          <td>{grandTotal}</td>
+                          <td>
+                            <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="row no-gutter">
                   <div className="col-sm-12">
-                    <div className="panel panel-default">
-                      <div className="panel-heading">
-                        <h3 className="panel-title">
-                          Payment Details
-                        </h3>
-                      </div>
-                      <div className="panel-body">
-                        <form>
-                          <div className="form-group">
-                            <label htmlFor="firstName">
-                              FIRST NAME</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
-                            </div>
-                            <label htmlFor="lastName">
-                              LAST NAME</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
-                            </div>
-                            <label htmlFor="phone">
-                              PHONE NUMBER</label>
-                            <div className="input-group">
-                              <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
-                            </div>
-                            <label htmlFor="email">
-                              EMAIL ADDRESS</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
-                            </div>
+                    <div className="collapse" id="collapsePayment">
+                      <div className="col-sm-12">
+                        <div className="panel panel-default">
+                          <div className="panel-heading">
+                            <h3 className="panel-title">
+                              Payment Details
+                            </h3>
                           </div>
-                          <div className="form-group">
-                            <label htmlFor="cardNumber">
-                              CARD NUMBER</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
-                              <span className="input-group-addon">
-                                <span className="glyphicon glyphicon-lock"></span>
-                              </span>
-                            </div>
-                          </div>
-                          <div className="row no-gutter">
-                            <div className="col-sm-4">
+
+                          <div className="panel-body">
+                            <form>
+                              <div className="form-group col-sm-6">
+                                <label htmlFor="firstName">
+                                  FIRST NAME</label>
+                                <div className="input-group">
+                                  <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
+                                </div>
+                              </div>
+                              <div className="form-group col-sm-6">
+                                <label htmlFor="lastName">
+                                  LAST NAME</label>
+                                <div className="input-group">
+                                  <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
+                                </div>
+                              </div>
+                              <div className="form-group col-sm-6">
+                                <label htmlFor="phone">
+                                  PHONE NUMBER</label>
+                                <div className="input-group">
+                                  <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
+                                </div>
+                              </div>
+                              <div className="form-group col-sm-6">
+                                <label htmlFor="email">
+                                  EMAIL ADDRESS</label>
+                                <div className="input-group">
+                                  <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
+                                </div>
+                              </div>
+                              <div className="form-group col-sm-12">
+                                <label htmlFor="cardNumber">
+                                  CARD NUMBER</label>
+                                <div className="input-group">
+                                  <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
+                                  <span className="input-group-addon">
+                                    <span className="glyphicon glyphicon-lock"></span>
+                                  </span>
+                                </div>
+                              </div>
                               <div className="form-group">
-                                <label htmlFor="expityMonth">
-                                  EXPIRY DATE</label>
-                                <div className="col-sm-6">
+
+                                <div className="col-sm-4">
+                                  <label htmlFor="expityMonth">
+                                    EXPIRY MONTH</label>
                                   <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
                                 </div>
-                                <div className="col-sm-6">
-                                  <input type="text" className="form-control" id="expityYear" placeholder="YY" required/></div>
+                                <div className="col-sm-4">
+                                  <label htmlFor="expityYear">
+                                    EXPIRY YEAR</label>
+                                  <input type="text" className="form-control" id="expityYear" placeholder="YY" required/>
+                                </div>
+                                <div className="col-sm-4">
+                                  <label htmlFor="cvCode">
+                                    CV</label>
+                                  <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xs-5 col-md-5 pull-right">
-                              <div className="form-group">
-                                <label htmlFor="cvCode">
-                                  CV CODE</label>
-                                <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
-                              </div>
-                            </div>
+                            </form>
                           </div>
-                        </form>
+                          <div className="panel-footer">
+                            <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={() => this.setState({checkout: true}) + this.processPayment()}>
+                              {(this.state.checkout === false)
+                                ? <div>{this.state.makePayment}</div>
+                                : <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+}
+                            </button>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
-                    <button type="button" className="btn btn-primary pull-right" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={()=>this.setState({checkout: true})}>
-                      {this.state.checkout === false ? (
-                        "Make Payment"
-                      ):(
-                        <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                      )}
-                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="row no-gutter">
-              <div className="col-sm-12">
-                <div className="collapse" id="collapseStatus">
-                  <div className="well">
-                    <ul className="list-group">
-                      <li className="list-group-item">
-                        <span className="badge">
-                          <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                        </span>
-                        Processing payment...
-                      </li>
-                      <li className="list-group-item">
-                        <span className="badge">
-                          <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                        </span>
-                        Processing order...
-                      </li>
-                    </ul>
+                <div className="row no-gutter">
+                  <div className="col-sm-12">
+                    <div className="collapse" id="collapseStatus">
+                      <div className="well">
+                        <ul className="list-group">
+                          {(this.state.checkout === false)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  <i className="fa fa-check" aria-hidden="true"></i>
+                                </span>
+                                Done!
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Processing payment...
+                            </li>
+}
+                          {(this.state.checkout === false)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  <i className="fa fa-check" aria-hidden="true"></i>
+                                </span>
+                                Received!
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Sending Order....
+                            </li>
+}
+                          {(this.state.checkout === false)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  {this.state.timer}
+                                </span>
+                                Your order will be ready soon
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Sending Order....
+                            </li>
+}
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-default" data-dismiss="modal">Back to menu
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">Back to menu
-                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
       </div>
     )
   }

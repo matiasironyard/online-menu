@@ -56,7 +56,8 @@ nav{
 }
 
 .panels{
-    background-color: rgba(34, 34, 34, 0.8);
+  padding-top: 30px;
+  background-color: rgba(34, 34, 34, 0.8);
 }
 
 .modal-header{

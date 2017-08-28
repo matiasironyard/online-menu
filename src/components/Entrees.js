@@ -36,7 +36,10 @@ export default class Entrees extends Component {
     return (
       <div className="row no-gutter">
         <div className="col-sm-8 col-sm-offset-2">
-          <h3 className="sub-headings">Entrees</h3>
+          <h3 className="sub-headings">
+            <i className="fa fa-leaf" aria-hidden="true"></i>
+            Entrees
+          </h3>
           <hr/>
           <table className="table">
             <thead>

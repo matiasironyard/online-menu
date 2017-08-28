@@ -4,27 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 export default class BaseLayout extends Component {
   render(){
-    // INLINE STYLING
-    let titleStyle = {
-      "fontFamily": "Arizonia",
-      "fontSize": "8rem",
-    }
-    let subtitleStyle = {
-      "fontFamily": "Raleway",
-      "fontSize": "5rem"
-    }
-    let headerStyle = {
-      "textAlign": "center",
-      "height": "60vh",
-      "paddingTop": "100px",
-      "color": "#fff",
-      "backgroundImage": "url(./images/header2.jpeg)",
-      "backgroundSize": "cover",
-      "backgroundPosition": "center",
-      "boxShadow":"rgba(0, 0, 0, 0.22) -2px 9px 5px 0px",
-      "textShadow": "1px 1px 2px black",
-      "fontFamily": "decorative",
-    }
     let navTitle = {
       "fontFamily": "Arizonia",
       "fontSize": "180%"
@@ -68,23 +47,6 @@ export default class BaseLayout extends Component {
             </div>
           </nav>
           </div>
-
-            <div
-              className="row no-gutter header"
-              style={headerStyle}>
-
-              <div className="header-title col-sm-12">
-                <div
-                  className="restaurant-name"
-                  style={titleStyle}>
-                  Majestic Thai
-                </div>
-                <div className="subtitle hidden-xs" style={subtitleStyle}>
-                  East Meets West
-                </div>
-              </div>
-
-            </div>
 
 
             {/*

@@ -137,7 +137,9 @@ class Menu extends Component {
     // Each component needs to receive state via props.
     return (
       <div className="app-body offset col-sm-10 col-sm-offset-1">
-        <h2 className="col-sm-offset-2 headings">Menu</h2>
+        <h2 className="col-sm-offset-2 headings">
+          Our Menu
+        </h2>
         {this.state.order.length > 0
           ? (
             <ModalButton order={this.state.order}/>

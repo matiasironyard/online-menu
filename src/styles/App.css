@@ -22,20 +22,21 @@ nav{
 
 .offset{
   position: relative;
-  bottom: 80px;
+  top: 80px;
   box-shadow:  rgba(0, 0, 0, 0.22) -2px 9px 5px 0px;
 }
 
 .headings {
   font-family: Arizonia;
-  font-size: 80px;
+  font-size: 2rem;
 }
 .sub-headings {
   font-family: Raleway;
+  font-size: 1rem;
 }
 .primary-text{
   font-size: 125%;
-  line-height: 3rem;
+  line-height: 1rem;
   font-family: Raleway;
   color: #DEDDDD;
 }
@@ -45,6 +46,9 @@ nav{
 
 .about {
   color: #fff;
+  position: relative;
+  top: -2rem;
+  margin-top: 20px;
 }
 
 .table{

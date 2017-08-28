@@ -39,7 +39,7 @@ export default class About extends Component {
       "backgroundImage": "url(./images/header2.jpeg)",
       "backgroundSize": "cover",
       "backgroundPosition": "center",
-      "boxShadow": "rgba(225, 225, 225, 0.22) -2px 9px 5px 0px",
+      "boxShadow": "rgba(0, 0, 0, 0.4) -2px 9px 5px 0px",
       "textShadow": "1px 1px 2px black",
       "fontFamily": "decorative"
     }

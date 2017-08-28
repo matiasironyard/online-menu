@@ -88,7 +88,7 @@ export default class About extends Component {
               </p>
             </article>
           </section>
-          <section className="row no-gutter about-row" style={aboutStyle}>
+          <section className="row no-gutter about-row" style={cuisineStyle}>
             <article className="col-sm-5 col-sm-offset-1 panels">
               <h2 className="headings">
                 Our Cuisine

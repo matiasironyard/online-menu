@@ -6,12 +6,14 @@ export default class ModalButton extends Component {
   render() {
     console.log('but', this.props.order)
     return(
-      <div>
+      <div className="row no-gutter">
+      <div className="order-button-panel col-xs-8 col-lg-5">
         {this.props.order.length > 0 ? (
-              <button type="button" className="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+              <div type="button" className="order-button-button pull-right" data-toggle="modal" data-target="#myModal" style={{zIndex: "2"}}>
                 View Order ({this.props.order.length})
-              </button>
+              </div>
             ):(<span></span>)}
+      </div>
       </div>
         )
   }

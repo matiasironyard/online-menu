@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 export default class OrderModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this._initState = {
       order: [],
       quantity: 1,
-      subTotal: this.props.subTotal,
       checkout: false,
+      makePayment: "Make Payment",
+      paymentStatus: false,
+      orderComplete: false,
+      collapse: "collapse",
+      orderNumber: 0
     }
+    this.state = this._initState;
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
+    this.processPayment = this.processPayment.bind(this);
+    this.resetModal = this.resetModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,18 +35,21 @@ export default class OrderModal extends Component {
     this.props.decrement(e);
   }
 
-  /*  handleSubTotal=(e)=>{
-    let prices = [0];
-    let i;
-    for(i = 0; i < e.length; i ++){
-      console.log('order for', e[i])
-      let x = Number(e[i].price)
-      prices.push(x)
-    }
-    const sum = prices.reduce((total, amount) => total + amount);
-  }*/
+  processPayment = () => {
+    let orderNumber = Math.floor(Math.random() * 89999 + 10000);
+    setTimeout(() => {
+      this.props.reset()
+      this.setState({makePayment: "Done!", checkout: false, orderComplete: true, orderNumber: orderNumber})
+    }, 2000);
+  }
+
+  resetModal = (e) => {
+    this.setState(this._initState);
+  }
+
 
   render() {
+    console.log('hi', this)
     let order = this.state.order;
     let prices = [0];
     let i;
@@ -53,7 +64,11 @@ export default class OrderModal extends Component {
     total = Number(total)
     let grandTotal = (total + tax).toFixed(2);
 
-    let deleteFunc = this.props.deleteFunc
+    let deleteFunc = this.props.deleteFunc;
+
+    let processPayment = this.state.processPayment;
+
+    console.log('this state now', this.state)
 
     let items = order.map((items) => {
       let price = Number(items.price)
@@ -63,13 +78,8 @@ export default class OrderModal extends Component {
       let key = Math.random();
 
       return (
-        <tr key={key} style={{
-          "zIndex": "1"
-        }}>
-          <td>{items.dish}</td>
-          <td>
-            {items.quantity}
-          </td>
+        <tr key={key}>
+          <td>{items.dish} (Qty. {items.quantity})</td>
           <td>
             <div className="btn-group" role="group" aria-label="...">
               <button type="button" className="btn btn-default" onClick={(e) => this.handleIncrement(items)}>
@@ -91,38 +101,7 @@ export default class OrderModal extends Component {
               </button>
             </div>
           </td>
-          <td>
-            <div className="btn-group" style={{
-              "zIndex": "99"
-            }}>
-              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i className="fa fa-leaf" aria-hidden="true"></i>
-                Level
-                <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu" style={{
-                "position": "relative",
-                "zIndex": "99"
-              }}>
-                <li>
-                  <a>1</a>
-                </li>
-                <li>
-                  <a>2</a>
-                </li>
-                <li>
-                  <a>3</a>
-                </li>
-                <li>
-                  <a>4</a>
-                </li>
-                <li>
-                  <a>5</a>
-                </li>
-              </ul>
-            </div>
-          </td>
-          <td>{toDecimals}</td>
+          <td>$ {toDecimals}</td>
         </tr>
       )
     })
@@ -130,160 +109,210 @@ export default class OrderModal extends Component {
     return (
       <div className="row">
         <div className="col-sm-12">
-      <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 className="modal-title" id="myModalLabel">Order Checkout</h4>
-            </div>
-            <div className="modal-body">
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Dish</th>
-                      <th>Quantity</th>
-                      <th>Adjust</th>
-                      <th>Spice</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items}
-                  </tbody>
-                </table>
-              </div>
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Subtotal</th>
-                      <th>Tax</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{subTotal}</td>
-                      <td>{tax}</td>
-                      <td>{grandTotal}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <button type="button" className="btn btn-primary pull-right" type="button" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
-            </div>
-            <div className="row no-gutter">
-              <div className="col-sm-12">
-                <div className="collapse" id="collapsePayment">
+          <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 className="modal-title" id="myModalLabel">Order Checkout</h4>
+                </div>
+                <div className="modal-body">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Dish</th>
+                          <th>Adjust</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {items}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Subtotal</th>
+                          <th>Tax</th>
+                          <th>Total</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{subTotal}</td>
+                          <td>{tax}</td>
+                          <td>$ {grandTotal}</td>
+                          <td>
+                            <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="row no-gutter">
                   <div className="col-sm-12">
-                    <div className="panel panel-default">
-                      <div className="panel-heading">
-                        <h3 className="panel-title">
-                          Payment Details
-                        </h3>
-                      </div>
-                      <div className="panel-body">
-                        <form role="form">
-                          <div className="form-group">
-                            <label for="firstName">
-                              FIRST NAME</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="firstName" placeholder="First Name" required autofocus/>
-                            </div>
-                            <label for="lastName">
-                              LAST NAME</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autofocus/>
-                            </div>
-                            <label for="phone">
-                              PHONE NUMBER</label>
-                            <div className="input-group">
-                              <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autofocus/>
-                            </div>
-                            <label for="email">
-                              EMAIL ADDRESS</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="email" placeholder="Email Address" required autofocus/>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label for="cardNumber">
-                              CARD NUMBER</label>
-                            <div className="input-group">
-                              <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus/>
-                              <span className="input-group-addon">
-                                <span className="glyphicon glyphicon-lock"></span>
-                              </span>
-                            </div>
-                          </div>
-                          <div className="row no-gutter">
-                            <div className="col-sm-4">
-                              <div className="form-group">
-                                <label for="expityMonth">
-                                  EXPIRY DATE</label>
-                                <div className="col-sm-6">
-                                  <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
+                    {(this.state.orderComplete === false)
+                      ? <div>
+                          <div className="collapse" id="collapsePayment">
+                            <div className="col-sm-12">
+                              <div className="panel panel-default">
+                                <div className="panel-heading">
+                                  <h3 className="panel-title">
+                                    Payment Details
+                                  </h3>
                                 </div>
-                                <div className="col-sm-6">
-                                  <input type="text" className="form-control" id="expityYear" placeholder="YY" required/></div>
+
+                                <div className="panel-body">
+                                  <form>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="firstName">
+                                        FIRST NAME</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="lastName">
+                                        LAST NAME</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="phone">
+                                        PHONE NUMBER</label>
+                                      <div className="input-group">
+                                        <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="email">
+                                        EMAIL ADDRESS</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-12">
+                                      <label htmlFor="cardNumber">
+                                        CARD NUMBER</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
+                                        <span className="input-group-addon">
+                                          <span className="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="form-group">
+
+                                      <div className="col-sm-4">
+                                        <label htmlFor="expityMonth">
+                                          EXPIRY MONTH</label>
+                                        <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
+                                      </div>
+                                      <div className="col-sm-4">
+                                        <label htmlFor="expityYear">
+                                          EXPIRY YEAR</label>
+                                        <input type="text" className="form-control" id="expityYear" placeholder="YY" required/>
+                                      </div>
+                                      <div className="col-sm-4">
+                                        <label htmlFor="cvCode">
+                                          CV</label>
+                                        <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div className="panel-footer">
+                                  <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={() => this.setState({checkout: true}) + this.processPayment()}>
+                                    {(this.state.checkout === false)
+                                      ? <div>{this.state.makePayment}</div>
+                                      : <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                                    }
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xs-5 col-md-5 pull-right">
-                              <div className="form-group">
-                                <label for="cvCode">
-                                  CV CODE</label>
-                                <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
-                              </div>
+
                             </div>
                           </div>
-                        </form>
+                        </div>
+                      : <div></div>
+                    }
+                  </div>
+                </div>
+
+                <div className="row no-gutter">
+                  <div className="col-sm-12">
+                    <div className="collapse" id="collapseStatus">
+                      <div className="well">
+                        <ul className="list-group">
+                          {(this.state.orderComplete === true)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  <i className="fa fa-check" aria-hidden="true"></i>
+                                </span>
+                                Payment Received!
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Processing Payment...
+                            </li>
+                          }
+                          {(this.state.orderComplete === true)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  <i className="fa fa-check" aria-hidden="true"></i>
+                                </span>
+                                Order Received!
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Sending Order...
+                            </li>
+                          }
+                          {(this.state.orderComplete === true)
+                            ? <li className="list-group-item">
+                                <span className="badge">
+                                  Order #: {this.state.orderNumber}
+                                </span>
+                                Order received. You will receive a text when your order is ready.
+                              </li>
+                            : <li className="list-group-item">
+                              <span className="badge">
+                                <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                              </span>
+                              Sending Order...
+                            </li>
+                          }
+                        </ul>
                       </div>
                     </div>
-                    <button type="button" className="btn btn-primary pull-right" type="button" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={()=>this.setState({checkout: true})}>
-                      {this.state.checkout === false ? (
-                        "Make Payment"
-                      ):(
-                        <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                      )}
-                    </button>
+                    <div className="modal-footer">
+                      {(this.state.orderComplete === false) ?
+                        <button type="button" className="btn btn-default" data-dismiss="modal" >Back to menu
+                        </button>
+                        :
+                        <button type="button" className="btn btn-default" data-dismiss="modal" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={(e) => this.resetModal()}>Thank you!
+                        </button>
+                      }
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="row no-gutter">
-              <div className="col-sm-12">
-                <div className="collapse" id="collapseStatus">
-                  <div className="well">
-                    <ul className="list-group">
-                      <li className="list-group-item">
-                        <span className="badge">
-                          <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                        </span>
-                        Processing payment...
-                      </li>
-                      <li className="list-group-item">
-                        <span className="badge">
-                          <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                        </span>
-                        Processing order...
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">Back to menu
-                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
       </div>
     )
   }

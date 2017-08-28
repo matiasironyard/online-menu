@@ -8,6 +8,7 @@ export default class OrderModal extends Component {
       quantity: 1,
       checkout: false,
       makePayment: "Make Payment",
+      paymentStatus: false,
       timer: null
     }
     this.handleIncrement = this.handleIncrement.bind(this);
@@ -49,7 +50,7 @@ export default class OrderModal extends Component {
         })
         setTimeout(f, 1000);
       })();
-      this.setState({checkout: false, makePayment: "Done!"})
+      this.setState({checkout: false, makePayment: "Done!", paymentStatus: true})
     }, 2000);
   }
 
@@ -177,89 +178,95 @@ export default class OrderModal extends Component {
                 </div>
                 <div className="row no-gutter">
                   <div className="col-sm-12">
-                    <div className="collapse" id="collapsePayment">
-                      <div className="col-sm-12">
-                        <div className="panel panel-default">
-                          <div className="panel-heading">
-                            <h3 className="panel-title">
-                              Payment Details
-                            </h3>
-                          </div>
+                    {(this.state.paymentStatus === false)
+                      ? <div>
+                          <div className="collapse" id="collapsePayment">
+                            <div className="col-sm-12">
+                              <div className="panel panel-default">
+                                <div className="panel-heading">
+                                  <h3 className="panel-title">
+                                    Payment Details
+                                  </h3>
+                                </div>
 
-                          <div className="panel-body">
-                            <form>
-                              <div className="form-group col-sm-6">
-                                <label htmlFor="firstName">
-                                  FIRST NAME</label>
-                                <div className="input-group">
-                                  <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
-                                </div>
-                              </div>
-                              <div className="form-group col-sm-6">
-                                <label htmlFor="lastName">
-                                  LAST NAME</label>
-                                <div className="input-group">
-                                  <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
-                                </div>
-                              </div>
-                              <div className="form-group col-sm-6">
-                                <label htmlFor="phone">
-                                  PHONE NUMBER</label>
-                                <div className="input-group">
-                                  <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
-                                </div>
-                              </div>
-                              <div className="form-group col-sm-6">
-                                <label htmlFor="email">
-                                  EMAIL ADDRESS</label>
-                                <div className="input-group">
-                                  <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
-                                </div>
-                              </div>
-                              <div className="form-group col-sm-12">
-                                <label htmlFor="cardNumber">
-                                  CARD NUMBER</label>
-                                <div className="input-group">
-                                  <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
-                                  <span className="input-group-addon">
-                                    <span className="glyphicon glyphicon-lock"></span>
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="form-group">
+                                <div className="panel-body">
+                                  <form>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="firstName">
+                                        FIRST NAME</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="firstName" placeholder="First Name" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="lastName">
+                                        LAST NAME</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="lastName" placeholder="Last Name" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="phone">
+                                        PHONE NUMBER</label>
+                                      <div className="input-group">
+                                        <input type="tel" name="usrtel" className="form-control" id="phone" placeholder="Phone Number" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-6">
+                                      <label htmlFor="email">
+                                        EMAIL ADDRESS</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="email" placeholder="Email Address" required autoFocus/>
+                                      </div>
+                                    </div>
+                                    <div className="form-group col-sm-12">
+                                      <label htmlFor="cardNumber">
+                                        CARD NUMBER</label>
+                                      <div className="input-group">
+                                        <input type="text" className="form-control" id="cardNumber" placeholder="Valid Card Number" required autoFocus/>
+                                        <span className="input-group-addon">
+                                          <span className="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="form-group">
 
-                                <div className="col-sm-4">
-                                  <label htmlFor="expityMonth">
-                                    EXPIRY MONTH</label>
-                                  <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
+                                      <div className="col-sm-4">
+                                        <label htmlFor="expityMonth">
+                                          EXPIRY MONTH</label>
+                                        <input type="text" className="form-control" id="expityMonth" placeholder="MM" required/>
+                                      </div>
+                                      <div className="col-sm-4">
+                                        <label htmlFor="expityYear">
+                                          EXPIRY YEAR</label>
+                                        <input type="text" className="form-control" id="expityYear" placeholder="YY" required/>
+                                      </div>
+                                      <div className="col-sm-4">
+                                        <label htmlFor="cvCode">
+                                          CV</label>
+                                        <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
+                                      </div>
+                                    </div>
+                                  </form>
                                 </div>
-                                <div className="col-sm-4">
-                                  <label htmlFor="expityYear">
-                                    EXPIRY YEAR</label>
-                                  <input type="text" className="form-control" id="expityYear" placeholder="YY" required/>
-                                </div>
-                                <div className="col-sm-4">
-                                  <label htmlFor="cvCode">
-                                    CV</label>
-                                  <input type="password" className="form-control" id="cvCode" placeholder="CV" required/>
+                                <div className="panel-footer">
+                                  <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={() => this.setState({checkout: true}) + this.processPayment()}>
+                                    {(this.state.checkout === false)
+                                      ? <div>{this.state.makePayment}</div>
+                                      : <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                                    }
+                                  </button>
                                 </div>
                               </div>
-                            </form>
-                          </div>
-                          <div className="panel-footer">
-                            <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={() => this.setState({checkout: true}) + this.processPayment()}>
-                              {(this.state.checkout === false)
-                                ? <div>{this.state.makePayment}</div>
-                                : <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-}
-                            </button>
+
+                            </div>
                           </div>
                         </div>
-
-                      </div>
-                    </div>
+                      : <div/>
+                    }
                   </div>
                 </div>
+
                 <div className="row no-gutter">
                   <div className="col-sm-12">
                     <div className="collapse" id="collapseStatus">
@@ -270,43 +277,43 @@ export default class OrderModal extends Component {
                                 <span className="badge">
                                   <i className="fa fa-check" aria-hidden="true"></i>
                                 </span>
-                                Done!
+                                Payment Received!
                               </li>
                             : <li className="list-group-item">
                               <span className="badge">
                                 <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                               </span>
-                              Processing payment...
+                              Processing Payment...
                             </li>
-}
+                          }
                           {(this.state.checkout === false)
                             ? <li className="list-group-item">
                                 <span className="badge">
                                   <i className="fa fa-check" aria-hidden="true"></i>
                                 </span>
-                                Received!
+                                Order Received!
                               </li>
                             : <li className="list-group-item">
                               <span className="badge">
                                 <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                               </span>
-                              Sending Order....
+                              Sending Order...
                             </li>
-}
+                          }
                           {(this.state.checkout === false)
                             ? <li className="list-group-item">
                                 <span className="badge">
                                   {this.state.timer}
                                 </span>
-                                Your order will be ready soon
+                                Your order will be ready soon!
                               </li>
                             : <li className="list-group-item">
                               <span className="badge">
                                 <i className="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                               </span>
-                              Sending Order....
+                              Sending Order...
                             </li>
-}
+                          }
                         </ul>
                       </div>
                     </div>

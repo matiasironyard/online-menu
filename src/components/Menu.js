@@ -56,13 +56,7 @@ class Menu extends Component {
   }
 
   handleOrder = (e) => {
-<<<<<<< HEAD
-    console.log('e', e)
 
-    let joined = this.state.order.concat(e);
-    console.log('joined', joined)
-    this.setState({order: joined})
-=======
     let dish = e.dish;
     let price = e.price;
     let cat = e.cat;
@@ -95,7 +89,6 @@ class Menu extends Component {
     });
     this.setState({order: joined, toggleActive: true, orderItem: orderItem, state: newObj})
 
->>>>>>> be50778
   }
 
   handleDelete = (e) => {
@@ -146,16 +139,6 @@ class Menu extends Component {
     // Each component needs to receive state via props.
     return (
       <div className="app-body offset col-sm-10 col-sm-offset-1">
-<<<<<<< HEAD
-        <h2 className="col-sm-offset-2 headings">Menu</h2>
-        {this.state.order.length > 0
-          ? (<ModalButton className="hidden" order={this.state.order}/>)
-          : (
-            <span className="hidden"></span>
-          )}
-        <OrderModal order={this.state.order} increment={this.handleIncrement} decrement={this.handleDecrement} subTotal={this.state.subTotal} deleteFunc={this.handleDelete}/>
-        <Appetizers appetizers={this.state.appetizers} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem} order={this.state.order}/>
-=======
         <div className="row no-gutter">
           <h2 className=" headings panels col-xs-8 col-lg-5">
             <span style={{color:"white"}}>Our </span><span style={{color:"red"}}> Menu</span>
@@ -172,7 +155,6 @@ class Menu extends Component {
         </div>
         <OrderModal order={this.state.order} increment={this.handleIncrement} decrement={this.handleDecrement} subTotal={this.state.subTotal} deleteFunc={this.handleDelete} reset={this.reset} paymentStatus={this.state.paymentStatus} makePayment={this.state.makePayment} checkout={this.state.checkout}/>
         <Appetizers appetizers={this.state.appetizers} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
->>>>>>> be50778
         <Entrees entrees={this.state.entrees} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
         <Desserts desserts={this.state.desserts} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
       </div>

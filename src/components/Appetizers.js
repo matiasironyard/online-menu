@@ -30,11 +30,11 @@ export default class Appetizers extends Component {
               {items.description}
             </td>
             <td>
-             {items.price}
+              {items.price}
             </td>
             <td>
               <div className="btn-group" role="group" aria-label="...">
-                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>
+                <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem} menuItem={items.dish} order={this.props.order}/>
               </div>
             </td>
           </tr>
@@ -44,19 +44,17 @@ export default class Appetizers extends Component {
     return (
       <div className="row no-gutter">
         <div className="col-sm-8 col-sm-offset-2">
-          <h3 className="sub-headings">
-            Appetizers
-          </h3>
+          <h3 className="sub-headings">Appetizers</h3>
           <hr/>
           <table className="table">
             <thead>
               <tr>
                 <th className="col-sm-3">
-                  Dish
+                  <i className="fa fa-cutlery" aria-hidden="true"></i>
                 </th>
                 <th className="col-sm-5">Description</th>
                 <th className="col-sm-1">
-                  $
+                  <i className="fa fa-money" aria-hidden="true"></i>
                 </th>
                 <th className="col-sm-2">
                   Order

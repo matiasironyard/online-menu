@@ -42,15 +42,9 @@ export default class HandleOrder extends Component {
 
     return (
       <div>
-<<<<<<< HEAD
-        {this.state.thisOrder !== undefined ? (
-          <button ref="btn" type="button" className="btn btn-default disabled" data-toggle="true">
-            <i className="fa fa-plus" aria-hidden="true"></i>
-=======
         {this.props.item.checkbox === true? (
           <button type="button" className="btn btn-default" onClick={(e) => deleteFunc(this.props.item)}>
             <i className="fa fa-trash-o" aria-hidden="true" ></i>
->>>>>>> be50778
           </button>
         ):(
           <button ref="btn" type="button" className="btn btn-default" data-toggle="true" onClick={(e) => this.handleOrder(this.props.item)}>

@@ -30,7 +30,7 @@ export default class Appetizers extends Component {
               {items.description}
             </td>
             <td>
-              {items.price}
+              $ {items.price}
             </td>
             <td>
               <div className="btn-group" role="group" aria-label="...">
@@ -45,7 +45,6 @@ export default class Appetizers extends Component {
       <div className="row no-gutter">
         <div className="col-sm-8 col-sm-offset-2">
           <h3 className="sub-headings">
-            <i className="fa fa-leaf" aria-hidden="true"></i>
             Appetizers
           </h3>
           <hr/>

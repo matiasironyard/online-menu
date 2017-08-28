@@ -17,7 +17,7 @@ nav{
 
 .app-body{
   background-color: white;
-  padding: 5px;
+  padding: 0;
 }
 
 .offset{
@@ -36,7 +36,7 @@ nav{
 }
 .primary-text{
   font-size: 125%;
-  line-height: 1rem;
+  line-height: 1.2rem;
   font-family: Raleway;
   color: #DEDDDD;
 }
@@ -49,6 +49,14 @@ nav{
   position: relative;
   top: -2rem;
   margin-top: 20px;
+}
+
+.panels{
+    background-color: rgba(34, 34, 34, 0.8);
+}
+
+.modal-header{
+  background-color: #888;
 }
 
 .table{
@@ -71,7 +79,7 @@ footer{
 .about-menu-btn{
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  padding: 50px;
 }
 
 .btn-lg {
@@ -91,17 +99,5 @@ footer{
     position:fixed;
     right:10%;
     bottom:2%;
-    animation: pulse 3s ease-in-out infinite alternate;
-}
-
-@keyframes pulse {
-  0% {
-    background: transparent;
-  }
-  50% {
-    background: #ccc;
-  }
-  100% {
-    background: transparent;
-  }
+    background-color: rgba(255, 255, 255, .5);
 }

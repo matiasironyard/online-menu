@@ -138,7 +138,7 @@ class Menu extends Component {
     return (
       <div className="app-body offset col-sm-10 col-sm-offset-1">
         <h2 className="col-sm-offset-2 headings">
-          Our Menu
+          <span>Our </span><span style={{color:"red"}}> Menu</span>
         </h2>
         {this.state.order.length > 0
           ? (

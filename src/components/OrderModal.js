@@ -120,7 +120,7 @@ export default class OrderModal extends Component {
               </button>
             </div>
           </td>
-          <td>{toDecimals}</td>
+          <td>$ {toDecimals}</td>
         </tr>
       )
     })
@@ -167,7 +167,7 @@ export default class OrderModal extends Component {
                         <tr>
                           <td>{subTotal}</td>
                           <td>{tax}</td>
-                          <td>{grandTotal}</td>
+                          <td>$ {grandTotal}</td>
                           <td>
                             <button type="button" className="btn btn-default" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">Check Out</button>
                           </td>

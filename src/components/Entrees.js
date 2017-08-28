@@ -44,11 +44,11 @@ export default class Entrees extends Component {
             <thead>
               <tr>
                 <th className="col-sm-3">
-                  <i className="fa fa-cutlery" aria-hidden="true"></i>
+                  Dish
                 </th>
                 <th className="col-sm-5">Description</th>
                 <th className="col-sm-1">
-                  <i className="fa fa-money" aria-hidden="true"></i>
+                  $
                 </th>
                 <th className="col-sm-2">
                   Order

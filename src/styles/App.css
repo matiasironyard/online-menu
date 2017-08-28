@@ -14,28 +14,34 @@ nav{
   font-size: 125%;
 }
 
+.nav-bar {
+  box-shadow: 0px 4px 1px #333;
+}
+
 
 .app-body{
   background-color: white;
-  padding: 5px;
+  padding: 0;
+  //padding-top: 30px;
 }
 
 .offset{
   position: relative;
-  bottom: 80px;
+  top: 80px;
   box-shadow:  rgba(0, 0, 0, 0.22) -2px 9px 5px 0px;
 }
 
 .headings {
   font-family: Arizonia;
-  font-size: 80px;
+  font-size: 2rem;
 }
 .sub-headings {
   font-family: Raleway;
+  font-size: 1rem;
 }
 .primary-text{
   font-size: 125%;
-  line-height: 3rem;
+  //line-height: 1.2rem;
   font-family: Raleway;
   color: #DEDDDD;
 }
@@ -43,8 +49,26 @@ nav{
   font-size: 1.3em;
 }
 
+.about-row {
+    min-height: 15rem
+}
+
 .about {
   color: #fff;
+  position: relative;
+  top: -2rem;
+  margin-top: 20px;
+}
+
+
+
+.panels{
+  padding: 30px 15px;
+  background-color: rgba(34, 34, 34, 0.8);
+}
+
+.modal-header{
+  background-color: #888;
 }
 
 .table{
@@ -58,6 +82,17 @@ nav{
 
 }
 
+.order-button-panel{
+  background-color: rgba(20 , 20, 20, 0.9);
+  padding: 15px;
+}
+
+.order-button-button{
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 footer{
   text-align: center;
   color: #fff;
@@ -67,7 +102,7 @@ footer{
 .about-menu-btn{
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  padding: 50px;
 }
 
 .btn-lg {
@@ -81,4 +116,11 @@ footer{
     color: #f5f5f5;
     background-color: rgba(255, 255, 255, 0);
     border-color: #ccc;
+}
+
+.order-btn {
+    position:fixed;
+    right:10%;
+    bottom:2%;
+    background-color: rgba(255, 255, 255, .5);
 }

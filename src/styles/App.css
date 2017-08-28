@@ -49,6 +49,10 @@ nav{
   font-size: 1.3em;
 }
 
+.about-row {
+    min-height: 15rem
+}
+
 .about {
   color: #fff;
   position: relative;
@@ -56,14 +60,7 @@ nav{
   margin-top: 20px;
 }
 
-.tb {
-    display: table;
-}
 
-.tb-cell{
-  display: table-cell;
-  float: none;
-}
 
 .panels{
   padding: 30px 15px;
@@ -83,6 +80,17 @@ nav{
   color: white;
   font-family: Raleway;
 
+}
+
+.order-button-panel{
+  background-color: rgba(20 , 20, 20, 0.9);
+  padding: 15px;
+}
+
+.order-button-button{
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 footer{

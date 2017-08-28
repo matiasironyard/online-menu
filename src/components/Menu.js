@@ -11,14 +11,15 @@ import ModalButton from '../components/ModalButton';
 class Menu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this._initState = {
       appetizers: [],
       entrees: [],
       desserts: [],
       order: [],
       toggleActive: false,
-      orderItem: 'crab'
+      orderItem: 'crab',
     }
+    this.state = this._initState;
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
   }
@@ -29,7 +30,6 @@ class Menu extends Component {
   componentDidMount() {
     // Set your API URL with the API key.
     let url = "https://tiny-lasagna-server.herokuapp.com/collections/reactthaimenu";
-    console.log('url', url)
     // Fetch data from API
     fetch(url).then((response) => {
       return response.json();
@@ -120,7 +120,9 @@ class Menu extends Component {
     });
     this.setState({order: updatedOrder, state: newObj})
   }
-
+  reset = ()=>{
+    this.setState(this._initState, this.componentDidMount())
+  }
   handleIncrement = (e) => {
     e.quantity++;
     this.setState({order: this.state.order})
@@ -132,22 +134,25 @@ class Menu extends Component {
   }
 
   render() {
-    console.log('h', this.state)
     // Your render should consist of the BaseLayout with the following children componenets: Appetizers, Entres, and Dessert.
     // Each component needs to receive state via props.
     return (
       <div className="app-body offset col-sm-10 col-sm-offset-1">
-        <h2 className="col-sm-offset-2 headings">
-          <span>Our </span><span style={{color:"red"}}> Menu</span>
-        </h2>
-        {this.state.order.length > 0
-          ? (
-            <ModalButton order={this.state.order}/>
-          )
-          : (
-            <span className="hidden"></span>
-          )}
-        <OrderModal order={this.state.order} increment={this.handleIncrement} decrement={this.handleDecrement} subTotal={this.state.subTotal} deleteFunc={this.handleDelete}/>
+        <div className="row no-gutter">
+          <h2 className=" headings panels col-xs-8 col-lg-5">
+            <span style={{color:"white"}}>Our </span><span style={{color:"red"}}> Menu</span>
+          </h2>
+        </div>
+        <div className="row no-gutter">
+          {this.state.order.length > 0
+            ? (
+              <ModalButton order={this.state.order}/>
+            )
+            : (
+              <span className="hidden"></span>
+            )}
+        </div>
+        <OrderModal order={this.state.order} increment={this.handleIncrement} decrement={this.handleDecrement} subTotal={this.state.subTotal} deleteFunc={this.handleDelete} reset={this.reset} paymentStatus={this.state.paymentStatus} makePayment={this.state.makePayment} checkout={this.state.checkout}/>
         <Appetizers appetizers={this.state.appetizers} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
         <Entrees entrees={this.state.entrees} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>
         <Desserts desserts={this.state.desserts} orderFunc={this.handleOrder} deleteFunc={this.handleDelete} toggleActive={this.state.toggleActive} orderItem={this.state.orderItem}/>

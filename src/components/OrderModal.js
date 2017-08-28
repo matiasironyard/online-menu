@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 export default class OrderModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this._initState = {
       order: [],
       quantity: 1,
       checkout: false,
       makePayment: "Make Payment",
       paymentStatus: false,
-      timer: null
+      orderComplete: false,
+      collapse: "collapse",
+      orderNumber: 0
     }
+    this.state = this._initState;
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
     this.processPayment = this.processPayment.bind(this);
+    this.resetModal = this.resetModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,41 +36,20 @@ export default class OrderModal extends Component {
   }
 
   processPayment = () => {
+    let orderNumber = Math.floor(Math.random() * 89999 + 10000);
     setTimeout(() => {
-      let start = Date.now();
-      let self = this;
-      (function f() {
-        let diff = Date.now() - start,
-          ns = (((6e5 - diff) / 1000) >> 0),
-          m = (ns / 60) >> 0,
-          s = ns - m * 60;
-        if (diff > (6e5)) {
-          start = Date.now()
-        }
-        console.log('now', start, m, s)
-        self.setState({
-          timer: m + ':' + (('' + s).length > 1
-            ? ''
-            : '0') + s + ' minutes'
-        })
-        setTimeout(f, 1000);
-      })();
-      this.setState({checkout: false, makePayment: "Done!", paymentStatus: true})
+      this.props.reset()
+      this.setState({makePayment: "Done!", checkout: false, orderComplete: true, orderNumber: orderNumber})
     }, 2000);
   }
 
-  /*  handleSubTotal=(e)=>{
-    let prices = [0];
-    let i;
-    for(i = 0; i < e.length; i ++){
-      console.log('order for', e[i])
-      let x = Number(e[i].price)
-      prices.push(x)
-    }
-    const sum = prices.reduce((total, amount) => total + amount);
-  }*/
+  resetModal = (e) => {
+    this.setState(this._initState);
+  }
+
 
   render() {
+    console.log('hi', this)
     let order = this.state.order;
     let prices = [0];
     let i;
@@ -95,10 +79,7 @@ export default class OrderModal extends Component {
 
       return (
         <tr key={key}>
-          <td>{items.dish}</td>
-          <td>
-            {items.quantity}
-          </td>
+          <td>{items.dish} (Qty. {items.quantity})</td>
           <td>
             <div className="btn-group" role="group" aria-label="...">
               <button type="button" className="btn btn-default" onClick={(e) => this.handleIncrement(items)}>
@@ -143,7 +124,6 @@ export default class OrderModal extends Component {
                       <thead>
                         <tr>
                           <th>Dish</th>
-                          <th>Quantity</th>
                           <th>Adjust</th>
                           <th>Total</th>
                         </tr>
@@ -176,9 +156,10 @@ export default class OrderModal extends Component {
                     </table>
                   </div>
                 </div>
+
                 <div className="row no-gutter">
                   <div className="col-sm-12">
-                    {(this.state.paymentStatus === false)
+                    {(this.state.orderComplete === false)
                       ? <div>
                           <div className="collapse" id="collapsePayment">
                             <div className="col-sm-12">
@@ -262,7 +243,7 @@ export default class OrderModal extends Component {
                             </div>
                           </div>
                         </div>
-                      : <div/>
+                      : <div></div>
                     }
                   </div>
                 </div>
@@ -272,7 +253,7 @@ export default class OrderModal extends Component {
                     <div className="collapse" id="collapseStatus">
                       <div className="well">
                         <ul className="list-group">
-                          {(this.state.checkout === false)
+                          {(this.state.orderComplete === true)
                             ? <li className="list-group-item">
                                 <span className="badge">
                                   <i className="fa fa-check" aria-hidden="true"></i>
@@ -286,7 +267,7 @@ export default class OrderModal extends Component {
                               Processing Payment...
                             </li>
                           }
-                          {(this.state.checkout === false)
+                          {(this.state.orderComplete === true)
                             ? <li className="list-group-item">
                                 <span className="badge">
                                   <i className="fa fa-check" aria-hidden="true"></i>
@@ -300,12 +281,12 @@ export default class OrderModal extends Component {
                               Sending Order...
                             </li>
                           }
-                          {(this.state.checkout === false)
+                          {(this.state.orderComplete === true)
                             ? <li className="list-group-item">
                                 <span className="badge">
-                                  {this.state.timer}
+                                  Order #: {this.state.orderNumber}
                                 </span>
-                                Your order will be ready soon!
+                                Order received. You will receive a text when your order is ready.
                               </li>
                             : <li className="list-group-item">
                               <span className="badge">
@@ -318,8 +299,13 @@ export default class OrderModal extends Component {
                       </div>
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-default" data-dismiss="modal">Back to menu
-                      </button>
+                      {(this.state.orderComplete === false) ?
+                        <button type="button" className="btn btn-default" data-dismiss="modal" >Back to menu
+                        </button>
+                        :
+                        <button type="button" className="btn btn-default" data-dismiss="modal" data-toggle="collapse" data-target="#collapseStatus" aria-expanded="false" aria-controls="collapseStatus" onClick={(e) => this.resetModal()}>Thank you!
+                        </button>
+                      }
                     </div>
                   </div>
                 </div>

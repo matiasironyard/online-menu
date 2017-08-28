@@ -22,7 +22,7 @@ nav{
 .app-body{
   background-color: white;
   padding: 0;
-  padding-top: 30px;
+  //padding-top: 30px;
 }
 
 .offset{
@@ -41,7 +41,7 @@ nav{
 }
 .primary-text{
   font-size: 125%;
-  line-height: 1.2rem;
+  //line-height: 1.2rem;
   font-family: Raleway;
   color: #DEDDDD;
 }
@@ -56,8 +56,17 @@ nav{
   margin-top: 20px;
 }
 
+.tb {
+    display: table;
+}
+
+.tb-cell{
+  display: table-cell;
+  float: none;
+}
+
 .panels{
-  padding-top: 30px;
+  padding: 30px 15px;
   background-color: rgba(34, 34, 34, 0.8);
 }
 

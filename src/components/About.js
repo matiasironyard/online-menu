@@ -19,8 +19,14 @@ export default class About extends Component {
       "backgroundSize": "cover",
       "textShadow": "1px 1px 2px black",
       "backgroundPosition": "top",
-      "height": "100%",
       //"padding": "100px"
+    }
+
+    let chef = {
+      "backgroundImage": "url(./images/chef.jpg)",
+      "backgroundSize": "cover",
+      "backgroundPosition": "middle",
+      "height": "100%"
     }
     // INLINE STYLING
     let titleStyle = {
@@ -58,6 +64,19 @@ export default class About extends Component {
 
         </div>
         <div className="app-body about  col-sm-10 col-sm-offset-1">
+          <section className="row no-gutter tb"style={aboutStyle}>
+            <article className="col-sm-6 panels tb-cell">
+              <h2 className="headings">
+                The Chef
+              </h2>
+              <hr/>
+                <p className="primary-text">
+                  Duis ullamcorper urna vitae est imperdiet, ut varius elit eleifend. Nullam nibh nunc, convallis eu nisl sit amet, porta faucibus tortor. Mauris sit amet lacus quis orci ornare condimentum vestibulum nec sem. Fusce suscipit eros diam, a pretium erat cursus id. Nam ullamcorper mauris sed vulputate consectetur. Donec id gravida nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse non turpis eu justo feugiat vehicula. Nam nec nulla odio. Pellentesque ac mattis justo.
+                </p>
+            </article>
+            <div className="col-sm-6 tb-cell" style={chef}>
+            </div>
+          </section>
           <section className="row no-gutter" style={aboutStyle}>
             <article className="col-sm-6 col-sm-offset-6 panels">
               <h2 className="headings">

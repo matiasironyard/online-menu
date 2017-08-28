@@ -25,7 +25,7 @@ export default class Desserts extends Component {
               {items.description}
             </td>
             <td>
-              $ {items.price}
+              {items.price}
             </td>
             <td>
                 <HandleOrder orderFunc={orderFunc} deleteFunc={deleteFunc} item={items} toggleActive={this.props.toggleActive} orderItem={this.props.orderItem}/>

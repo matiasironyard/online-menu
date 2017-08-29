@@ -5,9 +5,8 @@ export default class Appetizers extends Component {
 
 
   render(){
-    console.log('hdad', this.state)
     // PROPS
-    let items = this.props.appetizers
+    let items = this.props.appetizers;
     let orderFunc = this.props.orderFunc;
     let deleteFunc = this.props.deleteFunc;
     let order = this.props.order

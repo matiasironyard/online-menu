@@ -29,7 +29,7 @@ class Menu extends Component {
   // Set these to state.
   componentDidMount() {
     // Set your API URL with the API key.
-    let url = "https://tiny-lasagna-server.herokuapp.com/collections/reactthaimenu";
+    let url = "http://www.mocky.io/v2/59a5e617100000a00408fa96";
     console.log('url', url)
     // Fetch data from API
     fetch(url).then((response) => {

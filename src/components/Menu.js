@@ -29,7 +29,7 @@ class Menu extends Component {
   // Set these to state.
   componentDidMount() {
     // Set your API URL with the API key.
-    let url = "http://www.mocky.io/v2/59a5e617100000a00408fa96";
+    let url = "http://mockbin.org/bin/4d8b6faa-1222-4d23-9317-c2dfe8525130";
     console.log('url', url)
     // Fetch data from API
     fetch(url).then((response) => {

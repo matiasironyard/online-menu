@@ -1,13 +1,6 @@
 {
-<<<<<<< HEAD
-  "main.css": "static/css/main.df2d83cb.css",
-  "main.css.map": "static/css/main.df2d83cb.css.map",
-  "main.js": "static/js/main.937b1301.js",
-  "main.js.map": "static/js/main.937b1301.js.map"
-=======
   "main.css": "static/css/main.240b18f7.css",
   "main.css.map": "static/css/main.240b18f7.css.map",
-  "main.js": "static/js/main.9ad22564.js",
-  "main.js.map": "static/js/main.9ad22564.js.map"
->>>>>>> dev
+  "main.js": "static/js/main.84eb1228.js",
+  "main.js.map": "static/js/main.84eb1228.js.map"
 }

@@ -65,9 +65,9 @@ export default class About extends Component {
           </div>
 
         </div>
-        <div className="app-body about col-lg-8 col-lg-offset-2">
+        <div className="app-body about col-lg-10 col-lg-offset-1">
           <section className="row no-gutter about-row"style={aboutChef}>
-            <article className="col-sm-4 col-sm-offset-1 panels ">
+            <article className="col-sm-6 col-lg-5  panels ">
               <h2 className="headings">
                 The Chef
               </h2>
@@ -78,7 +78,7 @@ export default class About extends Component {
             </article>
           </section>
           <section className="row no-gutter about-row" style={aboutStyle}>
-            <article className="col-sm-5 col-sm-offset-6 panels">
+            <article className="col-sm-6 col-lg-5 col-sm-offset-6 col-lg-offset-7  panels">
               <h2 className="headings">
                 Our History
               </h2>
@@ -89,7 +89,7 @@ export default class About extends Component {
             </article>
           </section>
           <section className="row no-gutter about-row" style={cuisineStyle}>
-            <article className="col-sm-5 col-sm-offset-1 panels">
+            <article className="col-sm-6 col-lg-5  panels">
               <h2 className="headings">
                 Our Cuisine
               </h2>

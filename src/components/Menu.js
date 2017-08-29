@@ -141,7 +141,7 @@ class Menu extends Component {
     return (
       <div className="app-body offset col-sm-10 col-sm-offset-1">
         <div className="row no-gutter">
-          <h2 className=" headings panels col-xs-8 col-lg-5">
+          <h2 className=" headings menu-panels col-xs-8 col-lg-5">
             <span style={{color:"white"}}>Our </span><span style={{color:"red"}}> Menu</span>
           </h2>
         </div>

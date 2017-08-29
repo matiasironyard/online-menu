@@ -80,6 +80,7 @@ export default class OrderModal extends Component {
       return (
         <tr key={key}>
           <td>{items.dish} (Qty. {items.quantity})</td>
+          <td>$ {toDecimals}</td>
           <td>
             <div className="btn-group" role="group" aria-label="...">
               <button type="button" className="btn btn-default" onClick={(e) => this.handleIncrement(items)}>
@@ -101,7 +102,6 @@ export default class OrderModal extends Component {
               </button>
             </div>
           </td>
-          <td>$ {toDecimals}</td>
         </tr>
       )
     })
@@ -124,8 +124,8 @@ export default class OrderModal extends Component {
                       <thead>
                         <tr>
                           <th>Dish</th>
-                          <th>Adjust</th>
                           <th>Total</th>
+                          <th>Adjust</th>
                         </tr>
                       </thead>
                       <tbody>
